@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Frontend Mentor | Newsletter sign-up form with success message</title>
+  <link rel="stylesheet" href="style.css">
+  
+</head>
+<body class="h-screen w-screen flex justify-center items-center">
+
+  <!-- Sign-up form start -->
+  <div class="signUp_container flex">
+    <div class="signUp_left flex flex-col justify-center items-center">
+      <div class="signUp_left_header">
+        <h4> Stay updated!</h4>
+      </div>
+      <div class="para_wrapper">
+        <p> Join 60,000+ product managers receiving monthly updates on:</p>
+        <div class="message flex">
+          <img src="./assets/images/icon-list.svg" alt="">
+          <p>Product discovery and building what matters</p>
+        </div>
+        <div class="message flex">
+          <img src="./assets/images/icon-list.svg" alt="">
+          <p>Measuring to ensure updates are a success</p>
+        </div>
+        <div class="message flex">
+          <img src="./assets/images/icon-list.svg" alt="">
+          <p>And much more!</p>
+        </div>
+      </div>
+      <div class="input_div">
+        <div class="w-100 flex justify-between items-center">
+          <label for=""> Email address </label>
+          <p id="error_message">Valid Email Required</p>
+        </div>
+        <input type="text" id="input_email" placeholder=" email@company.com">
+      </div>
+      <button id="subscribeBtn"> Subscribe to monthly newsletter</button>
+    </div>
+    <div class="signUp_right">
+      <img src="./assets/images/illustration-sign-up-desktop.svg" alt="">
+    </div>
+  </div>
+
+  <!-- Sign-up form end -->
+
+  <!-- Success message start -->
+
+  <div class="success_container">
+    <img src="./assets/images/icon-success.svg" alt="">
+
+    <h4 class="text-3xl text-bold my-5">Thanks for subscribing!</h4>
+    <p>A confirmation email has been sent to <span id="email_value" class="text-bold"></span>. 
+      Please open it and click the button inside to confirm your subscription.</p>
+     <button>Dismiss message</button>
+  </div>
+
+  <!-- Success message end -->
+  
+  <script>
+    var success_container=document.querySelector(".success_container");
+    var subscribeBtn=document.querySelector("#subscribeBtn");
+    success_container.style.display="none";
+    document.querySelector("#error_message").style.display="none";
+    document.querySelector("#input_email").addEventListener("blur",function() {
+      const email_value=document.querySelector("#input_email").value;
+      if(email_value.length==0) {
+        document.querySelector("#input_email").classList.add("error");
+        document.querySelector("#error_message").style.display="block";
+      }
+    })
+    document.querySelector("#input_email").addEventListener("focus",function() {
+        document.querySelector("#input_email").classList.remove("error");
+        document.querySelector("#error_message").style.display="none";
+    })
+    subscribeBtn.addEventListener("click",function() {
+      document.querySelector("#email_value").innerHTML=document.querySelector("#input_email").value;
+      success_container.style.display="block";
+      document.querySelector(".signUp_container").style.display="none";
+    })
+    
+  </script>
+  
+</body>
+</html>
